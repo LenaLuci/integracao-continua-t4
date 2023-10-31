@@ -1,15 +1,22 @@
 name: CI Back-end
-on: 
+on:
+
   push:
     branches:
       - 'main'
     paths:
       - 'sgcmapi/**'
+
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'sgcmapi/**'
+  workflow_call:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Primeiro Passo"
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -20,4 +27,4 @@ jobs:
         name: Maven Compile/Test
         working-directory: sgcmapi/
         run: mvn compile test
-          
+        
